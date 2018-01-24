@@ -65,7 +65,7 @@ describe 'Sanitize' do
 
     describe '#node!' do
       it 'should sanitize a Nokogiri::XML::Node' do
-        doc  = Nokogiri::HTML5.parse('<b>Lo<!-- comment -->rem</b> <a href="pants" title="foo">ipsum</a> <a href="http://foo.com/"><strong>dolor</strong></a> sit<br/>amet <script>alert("hello world");</script>')
+        doc  = Nokogiri::HTML.parse('<b>Lo<!-- comment -->rem</b> <a href="pants" title="foo">ipsum</a> <a href="http://foo.com/"><strong>dolor</strong></a> sit<br/>amet <script>alert("hello world");</script>')
         frag = doc.fragment
 
         doc.xpath('/html/body/node()').each {|node| frag << node }
@@ -76,7 +76,7 @@ describe 'Sanitize' do
 
       describe "when the given node is a document and <html> isn't whitelisted" do
         it 'should raise a Sanitize::Error' do
-          doc = Nokogiri::HTML5.parse('foo')
+          doc = Nokogiri::HTML.parse('foo')
           proc { @s.node!(doc) }.must_raise Sanitize::Error
         end
       end
