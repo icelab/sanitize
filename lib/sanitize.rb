@@ -198,7 +198,7 @@ class Sanitize
       # the original document didn't actually include a content-type meta tag.
       replace_meta = !@config[:elements].include?('meta') ||
         node.xpath('/html/head/meta[@http-equiv]').none? do |meta|
-          meta['http-equiv'].downcase == 'content-type'
+          meta['http-equiv'].casecmp('content-type').zero?
         end
     end
 

@@ -1,5 +1,51 @@
 # Sanitize History
 
+## 4.6.4 (2018-03-20)
+
+* Fixed: A change introduced in 4.6.2 broke certain transformers that relied on
+  being able to mutate the name of an HTML node. That change has been reverted
+  and a test has been added to cover this case. [@zetter - #177][177]
+
+[177]:https://github.com/rgrove/sanitize/issues/177
+
+## 4.6.3 (2018-03-19)
+
+* [CVE-2018-3740][176]: Fixed an HTML injection vulnerability that could allow
+  XSS.
+
+  When Sanitize <= 4.6.2 is used in combination with libxml2 >= 2.9.2, a
+  specially crafted HTML fragment can cause libxml2 to generate improperly
+  escaped output, allowing non-whitelisted attributes to be used on whitelisted
+  elements.
+
+  Sanitize now performs additional escaping on affected attributes to prevent
+  this.
+
+  Many thanks to the Shopify Application Security Team for responsibly reporting
+  this issue.
+
+[176]:https://github.com/rgrove/sanitize/issues/176
+
+## 4.6.2 (2018-03-19)
+
+* Reduced string allocations to optimize memory usage. [@janklimo - #175][175]
+
+[175]:https://github.com/rgrove/sanitize/pull/175
+
+## 4.6.1 (2018-03-15)
+
+* Added support for frozen string literals in Ruby 2.4+.
+  [@flavorjones - #174][174]
+
+[174]:https://github.com/rgrove/sanitize/pull/174
+
+## 4.6.0 (2018-01-29)
+
+* Loosened the Nokogumbo dependency to allow installing semver-compatible
+  versions greater than or equal to v1.4. [@rafbm - #171][171]
+
+[171]:https://github.com/rgrove/sanitize/pull/171
+
 ## 4.5.0 (2017-06-04)
 
 * Added SVG-related CSS properties to the relaxed config. See [the diff][161]
